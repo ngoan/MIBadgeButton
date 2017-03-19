@@ -88,10 +88,13 @@
 - (void) setupBadgeViewWithString:(NSString *)string
 {
     if(!badgeLabel) {
-        if(IS_OS_7_OR_LATER)
+        if(IS_OS_7_OR_LATER) {
             badgeLabel = [[UILabel alloc] init];
-        else
+        } else {
             badgeLabel = [[MIBadgeLabel alloc] init];
+        }
+        
+        [self addSubview:badgeLabel];
     }
     [badgeLabel setClipsToBounds:YES];
     [badgeLabel setText:string];
@@ -105,7 +108,6 @@
     
     [badgeLabel setFrame:CGRectMake(self.bounds.size.width - 10 + horizontal, -(badgeSize.height / 2) - 10 + vertical, badgeSize.width,  badgeSize.width > 25 ? badgeSize.height : badgeSize.width)];
     [self setupBadgeStyle];
-    [self addSubview:badgeLabel];
     
     badgeLabel.hidden = string ? NO : YES;
     
